@@ -10,10 +10,10 @@
    "authenticationType":"xsuaa",
    "scope":{
     "GET":[
-     "$XSAPPNAME.SAM.view"
+     "$XSAPPNAME.SAM.create"
     ],
     "POST":[
-     "$XSAPPNAME.SAM.edit"
+     "$XSAPPNAME.SAM.create"
     ],
     "PUT":[
      "$XSAPPNAME.SAM.edit"
@@ -21,7 +21,7 @@
     "DELETE":[
      "$XSAPPNAME.SAM.edit"
     ],
-    "default":"$XSAPPNAME.SAM.view"
+    "default":"$XSAPPNAME.SAM.create"
    }
   }
  ]
