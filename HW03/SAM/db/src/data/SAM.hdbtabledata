@@ -2,47 +2,31 @@
   "format_version": 1,
   "imports": [
     {
-      "target_table": "SAM::User",
+      "target_table": "SAM::Author",
       "source_data": {
         "data_type": "CSV",
-        "file_name": "SAM::Users.csv",
+        "file_name": "SAM::Authors.csv",
         "has_header": true
       },
       "import_settings": {
         "import_columns": [
-          "usid",
+          "authid",
           "name"
         ]
       }
     },
     {
-      "target_table": "SAM::ExtraInfo.Address",
+      "target_table": "SAM::ExtraInfo.Books",
       "source_data": {
         "data_type": "CSV",
-        "file_name": "SAM::Address.csv",
+        "file_name": "SAM::Books.csv",
         "has_header": true
       },
       "import_settings": {
         "import_columns": [
-					"usid",
-					"city",
-					"strt",
-					"hnum"
-        ]
-      }
-    },
-    {
-      "target_table": "SAM::ExtraInfo.Cars",
-      "source_data": {
-        "data_type": "CSV",
-        "file_name": "SAM::Cars.csv",
-        "has_header": true
-      },
-      "import_settings": {
-        "import_columns": [
-					"crid",
-          "usid",
-          "name"
+					"bid",
+          "authid",
+          "caption"
         ]
       }
     }
