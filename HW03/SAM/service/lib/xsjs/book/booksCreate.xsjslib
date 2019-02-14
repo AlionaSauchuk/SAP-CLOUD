@@ -4,34 +4,24 @@
  @param {afterTableName} String -The name of a temporary table with the single entry after the operation (CREATE and UPDATE events only)
  */
 
-/*
- const USER_TABLE = "SAM::User";
- const SEQ_NAME = "SAM::usid";
- */
-
 function booksCreate(param){
-    $.trace.error(JSON.stringify(param));
     var after = param.afterTableName;
 
     //Get Input New Record Values
     var	pStmt = param.connection.prepareStatement("select * from \"" + after + "\"");
     var oResult = pStmt.executeQuery();
 
-    var oUserItems = recordSetToJSON(oResult, "items");
-    var obj = oUserItems.items[0];
-    $.trace.error(JSON.stringify(obj));
-
-    //TODO now HERE you have obj object. Similar to xsjs/lib/user/user.xsjslib method doPost line 13
-
+    var oBookItems = recordSetToJSON(oResult, "items");
+    var obj = oBookItems.items[0];
 	//Get Next Personnel Number
 	pStmt = param.connection.prepareStatement('select "SAM::bid".NEXTVAL from dummy');
 	var result = pStmt.executeQuery();
 
     while (result.next()) {
-		obj.id = result.getString(1);
+		obj.bid = result.getString(1);
 	}
 
-    $.trace.error(JSON.stringify(obj));
+    $.trace.error('my obj:   '+JSON.stringify(obj));
 	pStmt.close();
 	//Insert Record into DB Table and Temp Output Table
 	for( var i = 0; i<2; i++){
@@ -44,8 +34,9 @@ function booksCreate(param){
 			pStmt.close();
 			pStmt = param.connection.prepareStatement("insert into \"" + after + "\" values(?,?,?)" );
 		}
-		pStmt.setString(1, obj.id.toString());
-		pStmt.setString(2, obj.name.toString());
+		pStmt.setString(1, obj.bid.toString());
+		pStmt.setString(2, obj.authid.toString());
+        pStmt.setString(3, obj.caption.toString());
 		pStmt.executeUpdate();
 		pStmt.close();
 	}
