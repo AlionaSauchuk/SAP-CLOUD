@@ -27,24 +27,19 @@ var statementConstructor = function () {
     };
 
     this.createPreparedUpdateStatement = function (sTableName, oValueObject) {
-        let oResult = {
-            aValues: [],
-            sql: `UPDATE "${sTableName}" SET `
-        };
+        let sql = `UPDATE "${sTableName}" SET `;
 
         for(let key in oValueObject){
-            oResult.aValues.push(oValueObject[key]);
-            oResult.sql += `"${key}"='${oValueObject[key]}', `;
+            if(key!='bid')
+            {
+                sql += `"${key}"='${oValueObject[key]}', `
+            }
         };
 
-        // Remove the last unnecessary comma and blank
-        oResult.sql = oResult.sql.slice(0, -2);
-        oResult.sql = ` WHERE "bid"=${oValueObject.bid};`;
-
-        $.trace.error("sql to update: " + oResult.sql);
-        return oResult;
+        sql = sql.slice(0, -2);
+        sql += ` WHERE "bid"='${oValueObject.bid}';`;
+        return sql;
     };
-
 };
 
 
@@ -75,7 +70,7 @@ var book = function (connection) {
 
     this.doPost = function (obj) {
         //Get Next ID Number
-        oUser.usid = getNextval("SAM::bid");
+        obj.bid = getNextval("SAM::bid");
 
         //generate query
         const statement = statementConstructorLib.createPreparedInsertStatement(BOOKS_TABLE, obj);
@@ -90,10 +85,11 @@ var book = function (connection) {
 
     this.doPut = function (obj) {
         //generate query
-        const statement = statementConstructorLib.createPreparedUpdateStatement(BOOKS_TABLE, obj);
+        const statement = statementConstructorLib.createPreparedUpdateStatement(BOOKS_TABLE, obj); //`UPDATE "${BOOKS_TABLE}" SET "authid"='${obj.authid}', "caption"='${obj.caption}'  WHERE "bid"='${obj.bid}'`;
+        $.trace.error("sql to update: " + statement);
 
         //execute update
-        connection.executeUpdate(statement.sql, statement.aValues);
+        connection.executeUpdate(statement);
         connection.commit();
         $.response.status = $.net.http.OK;
         $.response.setBody('Books updated');
@@ -102,13 +98,8 @@ var book = function (connection) {
 
     this.doDelete = function (obj) {
 
-        let statement = `DELETE FROM "${AUTHORS_TABLE}" WHERE "bid"=${obj.bid};`;
-        $.trace.error("sql to delete: " + statement);
+        let statement = `DELETE FROM "${BOOKS_TABLE}" WHERE "bid"='${obj.bid}';`;
         connection.executeUpdate(statement);
-
-        statement = `DELETE FROM "${BOOKS_TABLE}" WHERE "bid"=${obj.bid};`;
-        connection.executeUpdate(statement);
-
         connection.commit();
 
         $.response.status = $.net.http.OK;
