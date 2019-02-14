@@ -9,7 +9,7 @@
  const SEQ_NAME = "SAM::usid";
  */
 
-function usersCreate(param){
+function booksCreate(param){
     $.trace.error(JSON.stringify(param));
     var after = param.afterTableName;
 
@@ -18,34 +18,34 @@ function usersCreate(param){
     var oResult = pStmt.executeQuery();
 
     var oUserItems = recordSetToJSON(oResult, "items");
-    var oUser = oUserItems.items[0];
-    $.trace.error(JSON.stringify(oUser));
+    var obj = oUserItems.items[0];
+    $.trace.error(JSON.stringify(obj));
 
-    //TODO now HERE you have oUser object. Similar to xsjs/lib/user/user.xsjslib method doPost line 13
+    //TODO now HERE you have obj object. Similar to xsjs/lib/user/user.xsjslib method doPost line 13
 
 	//Get Next Personnel Number
 	pStmt = param.connection.prepareStatement('select "SAM::bid".NEXTVAL from dummy');
 	var result = pStmt.executeQuery();
 
     while (result.next()) {
-		oUser.id = result.getString(1);
+		obj.id = result.getString(1);
 	}
 
-    $.trace.error(JSON.stringify(oUser));
+    $.trace.error(JSON.stringify(obj));
 	pStmt.close();
 	//Insert Record into DB Table and Temp Output Table
 	for( var i = 0; i<2; i++){
 		var pStmt;
 		if(i<1){
-			pStmt = param.connection.prepareStatement("insert into \"SAM::Books\" values(?,?)" );
+			pStmt = param.connection.prepareStatement("insert into \"SAM::ExtraInfo.Books\" values(?,?,?)" );
 		}else{
 			pStmt = param.connection.prepareStatement("TRUNCATE TABLE \"" + after + "\"" );
 			pStmt.executeUpdate();
 			pStmt.close();
-			pStmt = param.connection.prepareStatement("insert into \"" + after + "\" values(?,?)" );
+			pStmt = param.connection.prepareStatement("insert into \"" + after + "\" values(?,?,?)" );
 		}
-		pStmt.setString(1, oUser.id.toString());
-		pStmt.setString(2, oUser.name.toString());
+		pStmt.setString(1, obj.id.toString());
+		pStmt.setString(2, obj.name.toString());
 		pStmt.executeUpdate();
 		pStmt.close();
 	}
