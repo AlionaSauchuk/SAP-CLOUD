@@ -4,6 +4,8 @@
  @param {afterTableName} String -The name of a temporary table with the single entry after the operation (CREATE and UPDATE events only)
  */
 
+const BOOKS_TABLE ="SAM::ExtraInfo.Books";
+
 function booksCreate(param){
     var after = param.afterTableName;
 
@@ -27,7 +29,7 @@ function booksCreate(param){
 	for( var i = 0; i<2; i++){
 		var pStmt;
 		if(i<1){
-			pStmt = param.connection.prepareStatement("insert into \"SAM::ExtraInfo.Books\" values(?,?,?)" );
+			pStmt = param.connection.prepareStatement(`insert into \"${BOOKS_TABLE}\" values(?,?,?)` );
 		}else{
 			pStmt = param.connection.prepareStatement("TRUNCATE TABLE \"" + after + "\"" );
 			pStmt.executeUpdate();
@@ -36,10 +38,26 @@ function booksCreate(param){
 		}
 		pStmt.setString(1, obj.bid.toString());
 		pStmt.setString(2, obj.authid.toString());
-        pStmt.setString(3, obj.caption.toString());
+        pStmt.setString(3
+
+            , obj.caption.toString());
 		pStmt.executeUpdate();
 		pStmt.close();
 	}
+}
+
+function booksUpdate(param) {
+  var after = param.afterTableName;
+
+  var pStmt = param.connection.prepareStatement("select * from \"" + after + "\"");
+  var oResult = pStmt.executeQuery();
+
+  var oBookItems = recordSetToJSON(oResult, "items");
+  var oBook = oBookItems.items[0];
+  $.trace.error(JSON.stringify(oBook));
+  var uStmt;
+  uStmt = param.connection.prepareStatement(`UPDATE "${BOOKS_TABLE}" SET "authid"='${oBook.authid}', "caption"='${oBook.caption}'  WHERE "bid"=${oBook.bid};`);
+  uStmt.executeUpdate();
 }
 
 function recordSetToJSON(rs,rsName){

@@ -8,8 +8,8 @@ service namespace "SAM"{
 
     "SAM::ExtraInfo.Books" as "Books"
                 navigates("Books_2_Author" as "toAuthor")
-            create using "xsjs.book:booksCreate.xsjslib::booksCreate"
-            update forbidden
+            create using "xsjs.book:odata.xsjslib::booksCreate"
+            update using "xsjs.book:odata.xsjslib::booksUpdate"
             delete forbidden;
 
     association "Authors_2_Books" principal "Authors"("authid")
