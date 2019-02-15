@@ -1,30 +1,16 @@
-namespace SAM;
-
-using SAM::User;
+﻿namespace SAM;
+using SAM::Author;
 
 context ExtraInfo{
 
-		entity Address {
-    		@Comment: 'Id of Address'
-		    key adid : Integer64 generated always as identity ( start with 1 increment by 1 );
-		    @Comment: 'User for Address'
-		    usid : String(4);
-		    @Comment: 'City'
-		    city : String(100);
-		    @Comment: 'Street'
-		    strt : String(100);
-		    @Comment: 'House Number'
-		    hnum : Integer;
-		};
+		entity Books {
+				@Comment: 'Id of Book'
+				key bid : String(4);
+		    @Comment: 'Author of the Book'
+		    authid : String(4);
+		    @Comment: 'Caption'
+		    caption : String(50);
 
-		entity Cars {
-		    @Comment: 'Id of Car'
-		    key crid : String(4);
-		    @Comment: 'User for Car'
-		    usid : String(4);
-		    @Comment: 'Name'
-		    name : String(100);
-
-    		toUser : Association[1] to User on toUser.usid = usid;
+				toAuthor : Association[1] to Author on toAuthor.authid = authid;
 		};
 };
