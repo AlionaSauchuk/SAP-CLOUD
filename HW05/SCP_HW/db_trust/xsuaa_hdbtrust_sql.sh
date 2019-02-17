@@ -20,10 +20,10 @@ function show_options
     echo "Options: "
     echo " -a:      xsuaa base URI [default: https://localhost:30032/uaa-security]"
     echo " -i:      SQL template in [default: xsuaa_template.sql]"
-    echo " -q:      SQL file created [default: xs_appuser.sql]"
+    echo " -q:      SQL file created [default: xs_appbook.sql]"
     echo " -n:      HANA host name:port [default: EMPTY, no hdbsql used]"
-    echo " -u:      HANA system user name [default: system]"
-    echo " -p:      HANA system user password"
+    echo " -u:      HANA system book name [default: system]"
+    echo " -p:      HANA system book password"
 }
 # show help
 function show_help
@@ -92,7 +92,7 @@ while getopts ":a:q:n:u:p:i:" opt; do
         hana_host=$OPTARG
         ;;
     u)
-        hana_user=$OPTARG
+        hana_book=$OPTARG
         ;;
     p)
         hana_pwd=$OPTARG
@@ -117,13 +117,13 @@ if [ "$uaa_url" == "" ]; then
     uaa_url="https://localhost:30032/uaa-security"
 fi
 if [ "$out_file" == "" ]; then
-    out_file="xs_appuser.sql"
+    out_file="xs_appbook.sql"
 fi
 if [ "$in_file" == "" ]; then
     in_file="xsuaa_template.sql"
 fi
-if [ "$hana_user" == "" ]; then
-    hana_user="SYSTEM"
+if [ "$hana_book" == "" ]; then
+    hana_book="SYSTEM"
 fi
 if [ ! -f "$in_file" ]; then
     echo "File $in_file not found"
@@ -234,7 +234,7 @@ fi
 echo "Replaced variables in template"
 if [ "$hana_host" != "" ]; then
   echo "Execute hdbsql now..."
-  $run_hdbsql -n $hana_host -j -c "--" -separatorownline -u $hana_user -p $hana_pwd -I "$out_file"
+  $run_hdbsql -n $hana_host -j -c "--" -separatorownline -u $hana_book -p $hana_pwd -I "$out_file"
 else
   echo "SQL script in $PWD/$out_file ready to be executed via hdbsql or withint HANA studio"
 fi

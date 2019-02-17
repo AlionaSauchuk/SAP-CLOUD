@@ -26,7 +26,7 @@ modules:
         requires:
             - {name: pt_deployer}
         build-parameters:
-            requires: [{name: user_create, artifacts: ['./*'], target-path: resources/user_create},{name: user_display, artifacts: ['./*'], target-path: resources/user_display}]
+            requires: [{name: book_create, artifacts: ['./*'], target-path: resources/book_create},{name: book_display, artifacts: ['./*'], target-path: resources/book_display}]
         parameters:
             disk-quota: 256M
             memory: 256M
@@ -56,9 +56,9 @@ modules:
             memory: 512M
             disk_quota: 512M
     -
-        name: user_create
+        name: book_create
         type: html5
-        path: web/user_create
+        path: web/book_create
         parameters:
             disk-quota: 256M
             memory: 256M
@@ -67,9 +67,9 @@ modules:
         requires:
             - {name: pt_uaa}
     -
-        name: user_display
+        name: book_display
         type: html5
-        path: web/user_display
+        path: web/book_display
         parameters:
             disk-quota: 256M
             memory: 256M

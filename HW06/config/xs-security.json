@@ -21,7 +21,7 @@
     ],
     "role-templates": [
         {
-            "name": "user",
+            "name": "book",
             "description" : "Token Exchange",
             "scope-references": [ "$XSAPPNAME.USER" ]
         },

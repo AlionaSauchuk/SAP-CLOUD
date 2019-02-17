@@ -4,16 +4,16 @@
  "description": "Security profile of called application",
  "scopes": [
   {
-   "name": "uaa.user",
+   "name": "uaa.book",
    "description": "UAA"
   },
   {
    "name": "$XSAPPNAME.SAM.view",
-   "description": "Display users"
+   "description": "Display books"
   },
   {
    "name": "$XSAPPNAME.SAM.create",
-   "description": "Create users"
+   "description": "Create books"
   }
  ],
  "attributes": [
@@ -28,7 +28,7 @@
    "name": "Token_Exchange",
    "description": "UAA",
    "scope-references": [
-    "uaa.user"
+    "uaa.book"
    ]
   },
   {
