@@ -16,6 +16,18 @@
 							items="{
 								path: 'books>/Books'
 							}">
+							<headerToolbar>
+								<OverflowToolbar id="otbSubheader">
+									<Title text="Books owned by the author" level="H2" />
+									<ToolbarSpacer />
+									<Button id="editButton" text="Edit" type="Transparent"
+										press="onEdit" />
+									<Button id="saveButton" text="Save" type="Transparent"
+										press="onSave" visible="false" />
+									<Button id="cancelButton" text="Cancel" type="Transparent"
+										press="onCancel" visible="false" />
+								</OverflowToolbar>
+				</headerToolbar>
 							<columns>
 								<Column id="bookNameColumn">
 									<Text text="{i18n>bookNameLabelText}"/>

@@ -1,0 +1,28 @@
+{
+   "welcomeFile":"/index.html",
+   "authenticationMethod":"route",
+   "routes":[
+      {
+         "source":"^(.*)$",
+         "target":"$1",
+         "service":"html5-apps-repo-rt",
+         "csrfProtection":true,
+         "authenticationType":"xsuaa",
+         "scope":{
+            "GET":[
+             "$XSAPPNAME.SAM.create"
+            ],
+            "POST":[
+             "$XSAPPNAME.SAM.create"
+            ],
+            "PUT":[
+             "$XSAPPNAME.SAM.edit"
+            ],
+            "DELETE":[
+             "$XSAPPNAME.SAM.edit"
+            ],
+            "default":"$XSAPPNAME.SAM.create"
+           }
+              }
+   ]
+}
