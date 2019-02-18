@@ -5,7 +5,7 @@ sap.ui.define([
 ], function (Controller, JSONModel, jQuery) {
 	"use strict";
 
-	return Controller.extend("book_create.controller.App", {
+	var TableController = Controller.extend("book_create.controller.App", {
 
 		/**
 		 *  Hook for initializing the controller
@@ -14,33 +14,28 @@ sap.ui.define([
 			var oJSONData = {
 				busy : false
 			};
-			var oModel = new JSONModel(oJSONData);
 			this.oTable = this.byId("bookTable");
-			this.getView().setModel(this.oModel);
 			this.oReadOnlyTemplate = this.byId("bookTable").removeItem(0);
 			this.rebindTable(this.oReadOnlyTemplate, "Navigation");
 			this.oEditableTemplate = new sap.m.ColumnListItem({
 				cells: [
 					new sap.m.Input({
-						value: "{caption}"
+						value: "{books>caption}"
 					})
 				]
 			});
 			
 		},
 
-		rebindTable: function(oTemplate, sKeyboardMode) {
-			this.oTable.setKeyboardMode(sKeyboardMode);
-			/*
+		rebindTable: function(oTemplate, sKeyboardMode) {		
 			this.oTable.bindItems({
 				path: "books>/Books",
 				template: oTemplate,
 				key: "books>caption"
-			}).setKeyboardMode(sKeyboardMode);*/
+			}).setKeyboardMode(sKeyboardMode);
 		},
 
 		onEdit: function() {
-			this.aProductCollection = jQuery.extend(true, [], this.oModel.getProperty("books>/Books"));
 			this.byId("editButton").setVisible(false);
 			this.byId("saveButton").setVisible(true);
 			this.byId("cancelButton").setVisible(true);
@@ -58,7 +53,6 @@ sap.ui.define([
 			this.byId("cancelButton").setVisible(false);
 			this.byId("saveButton").setVisible(false);
 			this.byId("editButton").setVisible(true);
-			this.oModel.setProperty("books>/Books", this.aProductCollection);
 			this.rebindTable(this.oReadOnlyTemplate, "Navigation");
 		},
 
@@ -67,9 +61,8 @@ sap.ui.define([
 		},
 
 		onExit: function() {
-			this.aProductCollection = [];
+			this.aBookCollection = [];
 			this.oEditableTemplate.destroy();
-			this.oModel.destroy();
 		},
 
 		onPaste: function(oEvent) {
@@ -78,5 +71,5 @@ sap.ui.define([
 		}
 	});
 
-	return Controller;
+	return TableController;
 });

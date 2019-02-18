@@ -8,19 +8,19 @@
 		<App busy="{app}" class="sapUiSizeCompact">
 			<pages>
 				<Page title="{i18n>peoplePageTitle}"
-					class = "sapUiResponsiveContentPadding">
+					showHeader="false" 
+					enableScrolling="true" 
+					class="sapUiContentPadding">
 					<content>
 						<Table
 							id="bookTable"
 							growing="true"
 							growingThreshold="10"
 							paste="onPaste"
-							items="{
-								path: 'books>/Books'
-							}">
+							>
 							<headerToolbar>
 								<OverflowToolbar id="otbSubheader">
-									<Title text="Books owned by the author" level="H2" />
+									<Title text="Books owned by the author" />
 									<ToolbarSpacer />
 									<Button id="editButton" text="Edit" type="Transparent"
 										press="onEdit" />
@@ -47,10 +47,12 @@
 										<ObjectIdentifier  title="{books>caption}" text="{books>bid}" />
 									</cells>
 									<cells>
-											<Input />
+										<Text />
 									</cells>
 									<cells>
-										<Button/>
+										<Button id="deleteButton"
+										 text="Delete"
+										 type="Transparent"/>
 									</cells>
 								</ColumnListItem>
 							</items>
