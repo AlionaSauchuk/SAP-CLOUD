@@ -34,7 +34,7 @@
         <items>
           <ColumnListItem>
             <cells>
-              <Label text="{People>UserName}" />
+              <Label text="{People>BookName}" />
             </cells>
             <cells>
               <Label text="{People>FirstName}" />

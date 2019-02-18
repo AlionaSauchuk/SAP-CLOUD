@@ -1,7 +1,6 @@
 sap.ui.define([
-	"sap/ui/core/UIComponent",
-	"sap/ui/Device",
-], function (UIComponent, Device) {
+	"sap/ui/core/UIComponent"
+], function(UIComponent) {
 	"use strict";
 
 	return UIComponent.extend("book_create.Component", {
@@ -15,7 +14,7 @@ sap.ui.define([
 		 * @public
 		 * @override
 		 */
-		init: function () {
+		init: function() {
 			// call the base component's init function
 			UIComponent.prototype.init.apply(this, arguments);
 		}

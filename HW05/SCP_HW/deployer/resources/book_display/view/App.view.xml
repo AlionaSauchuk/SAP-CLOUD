@@ -2,8 +2,7 @@
     controllerName="book_display.controller.App"
     xmlns="sap.m"
     xmlns:l="sap.ui.layout"
-    xmlns:mvc="sap.ui.core.mvc"
-    >
+    xmlns:mvc="sap.ui.core.mvc">
     <Shell>
         <App id = "app">
         <Page

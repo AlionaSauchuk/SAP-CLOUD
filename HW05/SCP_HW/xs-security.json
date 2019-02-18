@@ -42,7 +42,7 @@
    ]
   },
   {
-   "name": "User",
+   "name": "Book",
    "description": "Display mode only",
    "scope-references": [
     "$XSAPPNAME.SAM.view"

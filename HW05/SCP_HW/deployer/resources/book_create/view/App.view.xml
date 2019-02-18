@@ -1,9 +1,49 @@
 <mvc:View
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
 	controllerName="book_create.controller.App"
-	displayBlock="true">
-	<App id="app" busyIndicatorDelay="0">
-	     <Button text="POST" press="sendPost" />
-  </App>
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Shell>
+		<App busy="{app}" class="sapUiSizeCompact">
+			<pages>
+				<Page title="{i18n>peoplePageTitle}">
+					<content>
+						<Table
+							id="bookList"
+							growing="true"
+							growingThreshold="10"
+							items="{
+								path: 'books>/Books'
+							}">
+							<columns>
+								<Column id="bookNameColumn">
+									<Text text="{i18n>bookNameLabelText}"/>
+								</Column>
+								<Column id="updateOnColumn">
+									<Text text="{i18n>updateOnLabelText}"/>
+								</Column>
+								<Column id="buttonColumn">
+									<Text text="{i18n>buttonLabelText}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Input value="{books>caption}"/>
+									</cells>
+									<cells>
+											<Input />
+									</cells>
+									<cells>
+										<Button/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
 </mvc:View>

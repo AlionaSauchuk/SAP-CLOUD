@@ -1,0 +1,36 @@
+<mvc:View
+    controllerName="book_create.controller.Details"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    >
+    <Shell>
+	<App id="details">
+	<pages>
+	<Page
+    showNavButton = "true"
+    navButtonPress = ".onNavBack"
+    title = "{books>bid}">
+    <Panel id="PeopleDetailPanel" headerText="Details" class="sapUiResponsiveMargin" width="auto">
+    <content>
+      <Table>
+        <columns>
+          <Column id="bookNameColumn">
+            <Text text="{i18n>bookNameLabelText}" />
+          </Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+              <Label text="{Books>caption}" />
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </content>
+  </Panel>
+	</Page>
+	</pages>
+	</App>
+</Shell>
+</mvc:View>

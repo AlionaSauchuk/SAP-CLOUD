@@ -22,10 +22,18 @@
             "name": "di.code-validation.core_issues.json"
         },
         {
-            "name": "fragment\\ConfirmDeleteDialog.fragment.xml"
+            "name": "i18n\\i18n.properties",
+            "raw": "i18n\\i18n.properties"
         },
         {
             "name": "index.html"
+        },
+        {
+            "name": "initMockServer-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "initMockServer.js"
         },
         {
             "name": "manifest.json"
@@ -41,10 +49,14 @@
             "name": "tmp\\controller\\App.controller.js"
         },
         {
-            "name": "tmp\\fragment\\ConfirmDeleteDialog.fragment.xml"
+            "name": "tmp\\i18n\\i18n.properties",
+            "raw": "i18n\\i18n.properties"
         },
         {
             "name": "tmp\\index.html"
+        },
+        {
+            "name": "tmp\\initMockServer.js"
         },
         {
             "name": "tmp\\manifest.json"
@@ -57,6 +69,9 @@
         },
         {
             "name": "tmp-dbg\\controller\\App.controller.js"
+        },
+        {
+            "name": "tmp-dbg\\initMockServer.js"
         },
         {
             "name": "view\\App.view.xml"

@@ -1,31 +1,20 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
-    "sap/ui/thirdparty/jquery"
-], function (Controller, jQuery) {
-    "use strict";
+	"sap/ui/core/mvc/Controller",
+	"sap/ui/model/json/JSONModel"
+], function (Controller, JSONModel) {
+	"use strict";
 
-    return Controller.extend("book_create.controller.App", {
-        onInit: function () {
-        },
-        onExit: function () {
-        },
-				sendPost: function(){
-            jQuery.ajax({
-                type: "POST",
-                url: "/api/xsjs/book/book.xsjs",
-                dataType: "json",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    name: 'Joker'
-								}),
-                success: function (data) {
-									alert("success");
-                },
-								error: function (){
-									alert("error");
-                }
-            });
-				}
-    });
+	return Controller.extend("book_create.controller.App", {
 
+		/**
+		 *  Hook for initializing the controller
+		 */
+		onInit : function () {
+			var oJSONData = {
+				busy : false
+			};
+			var oModel = new JSONModel(oJSONData);
+			this.getView().setModel(oModel, "appView");
+		}
+	});
 });
