@@ -1,8 +1,9 @@
 sap.ui.define([
 	"book_create/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
-	'jquery.sap.global'
-], function (BaseController, JSONModel, jQuery) {
+	'jquery.sap.global',
+	'sap/ui/model/Filter'
+], function (BaseController, JSONModel, jQuery, Filter) {
 	"use strict";
 
 	var TableController = BaseController.extend("book_create.controller.Home", {
@@ -21,10 +22,7 @@ sap.ui.define([
 						value: "{books>caption}"
 					})
 				]
-			});
-
-			var oModel = new JSONModel(oJSONData);
-			this.getView().setModel(oModel, "app");
+			});			
 			*/
 			
 		},
@@ -36,6 +34,22 @@ sap.ui.define([
 			console.log(context);
 			this.getRouter().navTo("details",  {bookID: context});
             
+		},
+
+		onSearch : function (oEvt) {
+
+			// add filter for search
+			var aFilters = [];
+			var sQuery = oEvt.getSource().getValue();
+			if (sQuery && sQuery.length > 0) {
+				var filter = new Filter("caption", sap.ui.model.FilterOperator.Contains, sQuery);
+				aFilters.push(filter);
+			}
+
+			// update list binding
+			var list = this.byId("bookList");
+			var binding = list.getBinding("items");
+			binding.filter(aFilters, "Application");
 		},
 
 /*

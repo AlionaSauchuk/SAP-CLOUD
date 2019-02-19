@@ -11,6 +11,13 @@
 					showHeader="false" 
 					enableScrolling="true" 
 					class="sapUiContentPadding">
+					<subHeader>
+					<Toolbar>
+						<SearchField 
+						 liveChange=".onSearch"
+						 width="100%" />
+					</Toolbar>
+					</subHeader>
 					<content>
 						<List id="bookList" 
 						headerText="{i18n>bookListTitle}"
