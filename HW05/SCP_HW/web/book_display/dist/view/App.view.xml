@@ -4,7 +4,7 @@
     xmlns:l="sap.ui.layout"
     xmlns:mvc="sap.ui.core.mvc">
     <Shell>
-        <App id = "app">
+        <App id = "appView">
         <Page
         id="mainPage"
         title = "{i18n>mainPageTitle}"

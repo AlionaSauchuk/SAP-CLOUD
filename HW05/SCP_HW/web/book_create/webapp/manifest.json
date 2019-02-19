@@ -29,18 +29,23 @@
     },
     "sap.ui5": {
         "rootView": {
-            "viewName": "book_create.view.App",
+            "viewName": "book_create.view.Home",
             "type": "XML",
             "async": true,
-            "id": "app"
+            "id": "home"
         },
         "dependencies": {
-            "minUI5Version": "1.30",
-            "libs": {
-                "sap.m": {},
-                "sap.ui.core": {}
-            }
+			"minUI5Version": "1.48.0",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.ui.layout": {}
+			}
         },
+        "contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
         "models": {
             "i18n": {
                 "type": "sap.ui.model.resource.ResourceModel",
@@ -49,56 +54,43 @@
                 }
             },
             "books": {
-                "dataSource": "xsoDataService",
-                "settings": {
-                    "defaultBindingMode": "TwoWay",
-                    "defaultCountMode": "Inline",
-                    "useBatch": false,
-                    "disableHeadRequestForToken": true
-                }
+                "dataSource": "xsoDataService"
             }
         },
         "routing": {
             "config": {
-                "routerClass": "sap.m.routing.Router",
-                "viewType": "XML",
-                "viewPath": "book_create.view",
-                "controlId": "app",
-                "controlAggregation": "pages",
-                "transition": "slide",
-                "bypassed": {
-                    "target": "notFound"
-                },
-                "async": true
+               "routerClass": "sap.m.routing.Router",
+               "viewType": "XML",
+               "viewPath": "book_create.view",
+               "controlId": "home",
+               "controlAggregation": "pages",
+               "transition": "slide",
+               "async": true
             },
-            "routes": [
-                {
-                    "pattern": "",
-                    "name": "appHome",
-                    "target": "app"
-                },
-                {
-                    "pattern": "details/{id}",
-                    "name": "details",
-                    "target": "details"
-                }
-            ],
+            "routes": [{
+               "pattern": "",
+               "name": "Home",
+               "target": "app"
+            },{
+             "pattern": "details",
+             "name": "Details",
+             "target": "details"
+         },{
+             "pattern": "details/{bookID}",
+             "name": "details",
+             "target": "details"
+         }],
             "targets": {
-                "app": {
-                    "viewID": "app",
-                    "viewName": "App",
-                    "viewLevel": 1
-                },
-                "details": {
-                    "viewID": "details",
-                    "viewName": "Details",
-                    "viewLevel": 2
-                },
-                "notFound": {
-                    "viewId": "notFound",
-                    "viewName": "NotFound",
-                    "transition": "show"
-                }
+             "app": {
+                 "viewId": "app",
+                 "viewName": "Home",
+                 "viewLevel" : 1
+             },
+             "details": {
+              "viewId": "details",
+              "viewName": "Details",
+              "viewLevel" : 1
+             }
             }
         }
     }

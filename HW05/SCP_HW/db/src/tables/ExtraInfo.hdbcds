@@ -10,7 +10,11 @@ context ExtraInfo{
 		    authid : String(4);
 		    @Comment: 'Caption'
 		    caption : String(50);
+				@Comment: 'Updated Date'
+    		onUpdate: UTCDateTime;
+				@Comment: 'Created Date'
+    		onCreate: UTCDateTime;
 
-				toAuthor : Association[1] to Author on toAuthor.authid = authid;
+			toAuthor : Association[1] to Author on toAuthor.authid = authid;
 		};
 };
