@@ -9,4 +9,5 @@ entity Author {
     name : String(30);
 
     toBooks : Association[*] to Books on toBooks.authid = authid;
+    toBooksCollection : Association[*] to Books on toBooksCollection.authid = authid;
 };

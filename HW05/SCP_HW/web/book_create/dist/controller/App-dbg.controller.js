@@ -2,10 +2,10 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	'jquery.sap.global'
-], function (Controller, JSONModel, jQuery) {
+], function (jQuery, Controller, JSONModel) {
 	"use strict";
 
-	var TableController = Controller.extend("book_create.controller.App", {
+	return Controller.extend("book_create.controller.App", {
 
 		/**
 		 *  Hook for initializing the controller
@@ -14,28 +14,12 @@ sap.ui.define([
 			var oJSONData = {
 				busy : false
 			};
-			this.oTable = this.byId("bookTable");
-			this.oReadOnlyTemplate = this.byId("bookTable").removeItem(0);
-			this.rebindTable(this.oReadOnlyTemplate, "Navigation");
-			this.oEditableTemplate = new sap.m.ColumnListItem({
-				cells: [
-					new sap.m.Input({
-						value: "{books>caption}"
-					})
-				]
-			});
-			
-		},
-
-		rebindTable: function(oTemplate, sKeyboardMode) {		
-			this.oTable.bindItems({
-				path: "books>/Books",
-				template: oTemplate,
-				key: "books>caption"
-			}).setKeyboardMode(sKeyboardMode);
+			var oModel = new JSONModel(oJSONData);
+			this.getView().setModel(oModel, "appView");
 		},
 
 		onEdit: function() {
+			this.aProductCollection = jQuery.extend(true, [], this.oModel.getProperty("/Books"));
 			this.byId("editButton").setVisible(false);
 			this.byId("saveButton").setVisible(true);
 			this.byId("cancelButton").setVisible(true);
@@ -53,23 +37,8 @@ sap.ui.define([
 			this.byId("cancelButton").setVisible(false);
 			this.byId("saveButton").setVisible(false);
 			this.byId("editButton").setVisible(true);
+			this.oModel.setProperty("/Books", this.aProductCollection);
 			this.rebindTable(this.oReadOnlyTemplate, "Navigation");
 		},
-
-		onOrder: function() {
-			MessageToast.show("Order button pressed");
-		},
-
-		onExit: function() {
-			this.aBookCollection = [];
-			this.oEditableTemplate.destroy();
-		},
-
-		onPaste: function(oEvent) {
-			var aData = oEvent.getParameter("data");
-			sap.m.MessageToast.show("Pasted Data: " + aData);
-		}
 	});
-
-	return TableController;
 });

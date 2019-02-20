@@ -7,20 +7,18 @@
 	<Shell>
 		<App busy="{app}" class="sapUiSizeCompact">
 			<pages>
-				<Page title="{i18n>peoplePageTitle}"
-					showHeader="false" 
-					enableScrolling="true" 
-					class="sapUiContentPadding">
+				<Page title="{i18n>peoplePageTitle}">
 					<content>
 						<Table
-							id="bookTable"
+							id="bookList"
 							growing="true"
 							growingThreshold="10"
-							paste="onPaste"
-							>
+							items="{
+								path: 'books>/Books'
+							}">
 							<headerToolbar>
 								<OverflowToolbar id="otbSubheader">
-									<Title text="Books owned by the author" />
+									<Title text="Books owned by the author" level="H2" />
 									<ToolbarSpacer />
 									<Button id="editButton" text="Edit" type="Transparent"
 										press="onEdit" />
@@ -29,28 +27,28 @@
 									<Button id="cancelButton" text="Cancel" type="Transparent"
 										press="onCancel" visible="false" />
 								</OverflowToolbar>
-							</headerToolbar>
+				</headerToolbar>
 							<columns>
-								<Column id="bookNameColumn" demandPopin="true">
+								<Column id="bookNameColumn">
 									<Text text="{i18n>bookNameLabelText}"/>
 								</Column>
 								<Column id="updateOnColumn">
 									<Text text="{i18n>updateOnLabelText}"/>
 								</Column>
-								<Column id="createColumn">
-									<Text text="{i18n>createLabelText}"/>
+								<Column id="buttonColumn">
+									<Text text="{i18n>buttonLabelText}"/>
 								</Column>
 							</columns>
 							<items>
 								<ColumnListItem>
 									<cells>
-										<ObjectIdentifier  title="{books>caption}" text="{books>bid}" />
+										<Input value="{books>caption}"/>
 									</cells>
 									<cells>
-										<ObjectIdentifier  text="{books>onUpdate}" />
+											<Input />
 									</cells>
 									<cells>
-										<Test />
+										<Button/>
 									</cells>
 								</ColumnListItem>
 							</items>

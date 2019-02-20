@@ -27,6 +27,11 @@
 							path: 'books>/Books'
 							}"
 						>
+						<headerToolbar>
+						<Toolbar>
+							<Button id="add" text="Add" press="handleAddPress"/>
+						</Toolbar>
+						</headerToolbar>
 						<items>
 							<StandardListItem title="{books>caption}"
 											info="Updated on: {books>onUpdate}"

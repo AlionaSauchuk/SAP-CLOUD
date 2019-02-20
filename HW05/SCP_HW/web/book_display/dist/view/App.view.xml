@@ -21,6 +21,8 @@
 					id="item"
                     type = "Active"
                     title = "{books>caption}"
+                    info="Updated on: {books>onUpdate}"
+                    description="Created on: {books>onCreate}"
                     press = ".goToDetails">
 				</ObjectListItem>
             </List>

@@ -31,6 +31,24 @@
           "onCreate"
         ]
       }
+    },
+
+    {
+      "target_table": "SAM::ExtraInfo.BooksCollection",
+      "source_data": {
+        "data_type": "CSV",
+        "file_name": "SAM::BooksCollection.csv",
+        "has_header": true
+      },
+      "import_settings": {
+        "import_columns": [
+					"bid",
+          "authid",
+          "caption",
+          "onUpdate",
+          "onCreate"
+        ]
+      }
     }
   ]
 }

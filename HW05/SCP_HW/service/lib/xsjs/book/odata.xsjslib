@@ -29,18 +29,18 @@ function booksCreate(param){
 	for( var i = 0; i<2; i++){
 		var pStmt;
 		if(i<1){
-			pStmt = param.connection.prepareStatement(`insert into \"${BOOKS_TABLE}\" values(?,?,?)` );
+			pStmt = param.connection.prepareStatement(`insert into \"${BOOKS_TABLE}\" values(?,?,?,?,?)` );
 		}else{
 			pStmt = param.connection.prepareStatement("TRUNCATE TABLE \"" + after + "\"" );
 			pStmt.executeUpdate();
 			pStmt.close();
-			pStmt = param.connection.prepareStatement("insert into \"" + after + "\" values(?,?,?)" );
+			pStmt = param.connection.prepareStatement("insert into \"" + after + "\" values(?,?,?,?,?)" );
 		}
 		pStmt.setString(1, obj.bid.toString());
 		pStmt.setString(2, obj.authid.toString());
-        pStmt.setString(3
-
-            , obj.caption.toString());
+    pStmt.setString(3, obj.caption.toString());
+    pStmt.setTimestamp(4, (new Date()).toISOString());
+		pStmt.setTimestamp(5, (new Date()).toISOString());
 		pStmt.executeUpdate();
 		pStmt.close();
 	}
@@ -56,7 +56,7 @@ function booksUpdate(param) {
   var oBook = oBookItems.items[0];
   $.trace.error(JSON.stringify(oBook));
   var uStmt;
-  uStmt = param.connection.prepareStatement(`UPDATE "${BOOKS_TABLE}" SET "authid"='${oBook.authid}', "caption"='${oBook.caption}'  WHERE "bid"=${oBook.bid};`);
+  uStmt = param.connection.prepareStatement(`UPDATE "${BOOKS_TABLE}" SET "authid"='${oBook.authid}', "caption"='${oBook.caption}', "onUpdate"=${CURR_TIMESTAMP}  WHERE "bid"=${oBook.bid};`);
   uStmt.executeUpdate();
 }
 

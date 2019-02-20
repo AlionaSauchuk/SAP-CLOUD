@@ -1,36 +1,50 @@
 <mvc:View
-    controllerName="book_create.controller.Details"
-    xmlns="sap.m"
-    xmlns:l="sap.ui.layout"
-    xmlns:mvc="sap.ui.core.mvc"
-    >
-    <Shell>
-	<App id="details">
-	<pages>
+	controllerName="book_create.controller.BookDetails"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	busyIndicatorDelay="0">
 	<Page
-    showNavButton = "true"
-    navButtonPress = ".onNavBack"
-    title = "{books>bid}">
-    <Panel id="PeopleDetailPanel" headerText="Details" class="sapUiResponsiveMargin" width="auto">
-    <content>
-      <Table>
-        <columns>
-          <Column id="bookNameColumn">
-            <Text text="{i18n>bookNameLabelText}" />
-          </Column>
-        </columns>
-        <items>
-          <ColumnListItem>
-            <cells>
-              <Label text="{Books>caption}" />
-            </cells>
-          </ColumnListItem>
-        </items>
-      </Table>
-    </content>
-  </Panel>
+        id="page"
+		title="{i18n>PageTitle}"
+		showNavButton="true"
+		navButtonPress=".onNavBack"
+		class="sapUiResponsiveContentPadding">
+        <customHeader>
+			<Bar>
+				<contentRight>
+					<Button id="edit" text="Edit" enabled="false" press="handleEditPress" />
+					<Button id="save" text="Save" type="Emphasized" visible="false" press="handleSavePress" />
+					<Button id="cancel" text="Cancel" visible="false" press="handleCancelPress" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+		  <!-->
+			<Panel
+				width="auto"
+				class="sapUiResponsiveMargin sapUiNoContentPadding">
+				<headerToolbar>
+					<Toolbar>
+                    
+					</Toolbar>
+				</headerToolbar>
+          
+				<content>
+					<f:SimpleForm
+
+						minWidth="1024"
+						editable="false"
+						layout="ResponsiveGridLayout"
+						>
+						<f:content>
+							<Label text="{i18n>formCaption}"/>
+							<Text text="{books>caption}"/>
+							<Label text="{i18n>formAuthor}"/>
+							<FormattedText htmlText="{people>AddressInfo/0/Address}" />
+						</f:content>
+					</f:SimpleForm>
+				</content>
+              
+			</Panel> -->
 	</Page>
-	</pages>
-	</App>
-</Shell>
 </mvc:View>
