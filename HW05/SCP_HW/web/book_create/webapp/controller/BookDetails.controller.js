@@ -1,75 +1,59 @@
 sap.ui.define([
 	"book_create/controller/BaseController",
     "sap/ui/core/routing/History",
-    'sap/ui/core/Fragment',
-],function (BaseController, History,  Fragment) {
+		'jquery.sap.global'
+],function (BaseController, History,  jQuery,) {
 	"use strict";
 	return BaseController.extend("book_create.controller.BookDetails", {
 		onInit: function(){
 			var oRouter = this.getRouter();
 			oRouter.getRoute("details").attachPatternMatched(this._onObjectMatched, this);
-  
-			this.getView().getModel().attachRequestCompleted(function() {
-				this.byId('editButton').setEnabled(true);
-			}.bind(this));
 
+			this._showFormFragment('Display');
+			this.byId('edit').setEnabled(true);
+		},
 
-        },
+		_formFragments: {},
 
 		_showFormFragment : function (sFragmentName) {
 			var oPage = this.byId("page");
 
 			oPage.removeAllContent();
 			oPage.insertContent(this._getFormFragment(sFragmentName));
-        },
+    },
 
-        _getFormFragment: function (sFragmentName) {
+		_getFormFragment: function (sFragmentName) {
+		
 			var oFormFragment = this._formFragments[sFragmentName];
 
 			if (oFormFragment) {
 				return oFormFragment;
 			}
 
-			oFormFragment = sap.ui.xmlfragment(this.getView().getId(), "book_create." + sFragmentName);
+		var	oFormFragment = sap.ui.xmlfragment("book_create.view." + sFragmentName);
 
 			this._formFragments[sFragmentName] = oFormFragment;
 			return this._formFragments[sFragmentName];
 		},
 		
-        
-		onEdit: function() {
-			this.byId("editButton").setVisible(false);
-			this.byId("saveButton").setVisible(true);
-            this.byId("cancelButton").setVisible(true);
-            this.getView().setEditable(true);
+		handleEditPress : function () {
+
+			//Clone the data
+			this._oSupplier = jQuery.extend({}, this.getView().getModel().getData().SupplierCollection[0]);
+			this._toggleButtonsAndView(true);
+
 		},
 
-		onSave: function() {
-			this.byId("saveButton").setVisible(false);
-			this.byId("cancelButton").setVisible(false);
-			this.byId("editButton").setVisible(true);
-			this.rebindForm(this.oReadOnlyTemplate, "Navigation");
-		},
+		_toggleButtonsAndView : function (bEdit) {
+			var oView = this.getView();
 
-		onCancel: function() {
-			this.byId("cancelButton").setVisible(false);
-			this.byId("saveButton").setVisible(false);
-			this.byId("editButton").setVisible(true);
-			this.rebindForm(this.oReadOnlyTemplate, "Navigation");
-		},
+			// Show the appropriate action buttons
+			oView.byId("edit").setVisible(!bEdit);
+			oView.byId("save").setVisible(bEdit);
+			oView.byId("cancel").setVisible(bEdit);
 
-		onOrder: function() {
-			MessageToast.show("Order button pressed");
-		},
-
-		onExit: function() {
-			this.aBookCollection = [];
-			this.oEdiFormTemplate.destroy();
-		},
-
-		onPaste: function(oEvent) {
-			var aData = oEvent.getParameter("data");
-			sap.m.MessageToast.show("Pasted Data: " + aData);
+			// Set the right form type
+			this._showFormFragment(bEdit ? "Change" : "Display");
 		},
 
 		_onObjectMatched: function (oEvent) {

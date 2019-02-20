@@ -10,25 +10,16 @@
 		showNavButton="true"
 		navButtonPress=".onNavBack"
 		class="sapUiResponsiveContentPadding">
-        	<customHeader>
+        <customHeader>
 			<Bar>
 				<contentRight>
-                    <Button id="editButton" 
-							text="Edit" 
-							press="onEdit" />
-					<Button id="saveButton" 
-							text="Save" 
-							press="onSave" 
-                            visible="false" />
-					<Button id="cancelButton" 
-                            text="Cancel" 
-							press="onCancel" 
-                            visible="false" />
-                </contentRight>
-
-            </Bar>
-            </customHeader>
-	      <!--	<content>
+					<Button id="edit" text="Edit" enabled="false" press="handleEditPress" />
+					<Button id="save" text="Save" type="Emphasized" visible="false" press="handleSavePress" />
+					<Button id="cancel" text="Cancel" visible="false" press="handleCancelPress" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+		  <!-->
 			<Panel
 				width="auto"
 				class="sapUiResponsiveMargin sapUiNoContentPadding">
@@ -54,7 +45,6 @@
 					</f:SimpleForm>
 				</content>
               
-			</Panel>
-		</content>  -->
+			</Panel> -->
 	</Page>
 </mvc:View>
