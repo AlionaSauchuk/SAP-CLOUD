@@ -27,13 +27,6 @@
 							path: 'books>/Books'
 							}"
 						>
-						<infoToolbar>
-						<Toolbar
-							visible="false"
-							id="idInfoToolbar" >
-							<Label id="idFilterLabel" />
-						</Toolbar>
-						</infoToolbar>
 						<items>
 							<StandardListItem title="{books>caption}"
 											info="Updated on: {books>onUpdate}"

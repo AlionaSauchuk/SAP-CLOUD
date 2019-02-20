@@ -5,20 +5,42 @@
 	xmlns:f="sap.ui.layout.form"
 	busyIndicatorDelay="0">
 	<Page
-		title="{i18n>BookDetailsOf} {books>caption}"
+        id="page"
+		title="{i18n>PageTitle}"
 		showNavButton="true"
 		navButtonPress=".onNavBack"
 		class="sapUiResponsiveContentPadding">
-		<content>
+        	<customHeader>
+			<Bar>
+				<contentRight>
+                    <Button id="editButton" 
+							text="Edit" 
+							press="onEdit" />
+					<Button id="saveButton" 
+							text="Save" 
+							press="onSave" 
+                            visible="false" />
+					<Button id="cancelButton" 
+                            text="Cancel" 
+							press="onCancel" 
+                            visible="false" />
+                </contentRight>
+
+            </Bar>
+            </customHeader>
+	      <!--	<content>
 			<Panel
 				width="auto"
 				class="sapUiResponsiveMargin sapUiNoContentPadding">
 				<headerToolbar>
 					<Toolbar>
+                    
 					</Toolbar>
 				</headerToolbar>
+          
 				<content>
 					<f:SimpleForm
+
 						minWidth="1024"
 						editable="false"
 						layout="ResponsiveGridLayout"
@@ -27,11 +49,12 @@
 							<Label text="{i18n>formCaption}"/>
 							<Text text="{books>caption}"/>
 							<Label text="{i18n>formAuthor}"/>
-						<!--	<FormattedText htmlText="{people>AddressInfo/0/Address}" />-->
+							<FormattedText htmlText="{people>AddressInfo/0/Address}" />
 						</f:content>
 					</f:SimpleForm>
 				</content>
+              
 			</Panel>
-		</content>
+		</content>  -->
 	</Page>
 </mvc:View>
