@@ -2,7 +2,7 @@ sap.ui.define([
 	"book_create/controller/BaseController",
     "sap/ui/core/routing/History",
 		'jquery.sap.global'
-],function (BaseController, History,  jQuery,) {
+],function (BaseController, History,  jQuery) {
 	"use strict";
 	return BaseController.extend("book_create.controller.BookDetails", {
 		onInit: function(){
@@ -37,11 +37,8 @@ sap.ui.define([
 		},
 		
 		handleEditPress : function () {
-
-			//Clone the data
-			this._oSupplier = jQuery.extend({}, this.getView().getModel().getData().SupplierCollection[0]);
+			this._showFormFragment('Change');
 			this._toggleButtonsAndView(true);
-
 		},
 
 		_toggleButtonsAndView : function (bEdit) {
@@ -54,6 +51,16 @@ sap.ui.define([
 
 			// Set the right form type
 			this._showFormFragment(bEdit ? "Change" : "Display");
+		},
+
+		handleCancelPress : function () {
+			this._toggleButtonsAndView(false);
+		},
+
+		handleSavePress : function () {
+
+			this._toggleButtonsAndView(false);
+
 		},
 
 		_onObjectMatched: function (oEvent) {
