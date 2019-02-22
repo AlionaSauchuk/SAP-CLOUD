@@ -5,6 +5,7 @@
  */
 
 const BOOKS_TABLE ="SAM::ExtraInfo.Books";
+const CURR_TIMESTAMP="current_timestamp";
 
 function booksCreate(param){
     var after = param.afterTableName;

@@ -10,9 +10,13 @@
 			columnsM="2"
 			columnsL="3"
 			columnsXL="4"
-			>
+		>
 			<f:content>
-				<Label text="{i18n>bookListTitle}" />
+				<Label text="{i18n>bookIdLabel}" />
+				<Text id="ID" text="{books>bid}" />
+				<Label text="{i18n>bookAuthorLabel}" />
+				<Input id="authid" value="{books>authid}" />
+				<Label text="{i18n>bookCaptionLabel}" />
 				<Input id="caption" value="{books>caption}" />
 			</f:content>
 		</f:SimpleForm>

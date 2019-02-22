@@ -43,11 +43,11 @@
             "name": "index.html"
         },
         {
-            "name": "initMockServer-dbg.js",
+            "name": "init-dbg.js",
             "isDebug": true
         },
         {
-            "name": "initMockServer.js"
+            "name": "init.js"
         },
         {
             "name": "manifest.json"
@@ -76,7 +76,7 @@
             "name": "tmp\\index.html"
         },
         {
-            "name": "tmp\\initMockServer.js"
+            "name": "tmp\\init.js"
         },
         {
             "name": "tmp\\manifest.json"
@@ -86,6 +86,9 @@
         },
         {
             "name": "tmp\\view\\Details.view.xml"
+        },
+        {
+            "name": "tmp\\view\\Dialog.fragment.xml"
         },
         {
             "name": "tmp\\view\\Display.fragment.xml"
@@ -106,13 +109,16 @@
             "name": "tmp-dbg\\controller\\Home.controller.js"
         },
         {
-            "name": "tmp-dbg\\initMockServer.js"
+            "name": "tmp-dbg\\init.js"
         },
         {
             "name": "view\\Change.fragment.xml"
         },
         {
             "name": "view\\Details.view.xml"
+        },
+        {
+            "name": "view\\Dialog.fragment.xml"
         },
         {
             "name": "view\\Display.fragment.xml"

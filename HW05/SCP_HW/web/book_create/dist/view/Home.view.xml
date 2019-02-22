@@ -8,6 +8,7 @@
 		<App id="home">
 			<pages>
 				<Page 
+					id="homePage"
 					showHeader="false" 
 					enableScrolling="true" 
 					class="sapUiContentPadding">
@@ -27,60 +28,23 @@
 							path: 'books>/Books'
 							}"
 						>
+						<headerToolbar>
+						<Toolbar>
+						<Button
+							class="sapUiSmallMarginBottom"
+							text="Show Select Dialog"
+							press="handleSelectDialogPress" />
+						</Toolbar>
+						</headerToolbar>
 						<items>
 							<StandardListItem title="{books>caption}"
-											info="Updated on: {books>onUpdate}"
-											description="Created on: {books>onCreate}"
-											type="Navigation"
-											press = ".onItemSelected"
+								info="Updated on: {books>onUpdate}"
+								description="Created on: {books>onCreate}"
+								type="Navigation"
+								press = ".onItemSelected"
 							/>
 						</items>
 						</List>
-					<!--	<Table
-							id="bookTable"
-							growing="true"
-							growingThreshold="10"
-							paste="onPaste"
-							>
-							<headerToolbar>
-								<OverflowToolbar id="otbSubheader">
-									<Title text="Books owned by the author" />
-									<ToolbarSpacer />
-									<Button id="editButton" text="Edit" type="Transparent"
-										press="onEdit" />
-									<Button id="saveButton" text="Save" type="Transparent"
-										press="onSave" visible="false" />
-									<Button id="cancelButton" text="Cancel" type="Transparent"
-										press="onCancel" visible="false" />
-								</OverflowToolbar>
-							</headerToolbar>
-							<columns>
-								<Column id="bookNameColumn" demandPopin="true">
-									<Text text="{i18n>bookNameLabelText}"/>
-								</Column>
-								<Column id="updateOnColumn">
-									<Text text="{i18n>updateOnLabelText}"/>
-								</Column>
-								<Column id="createColumn">
-									<Text text="{i18n>createLabelText}"/>
-								</Column>
-							</columns>
-							<items>
-								<ColumnListItem  
-								 type="Navigation"
-								 press = ".onItemSelected">
-									<cells>
-										<ObjectIdentifier  title="{books>caption}" text="{books>bid}" />
-									</cells>
-									<cells>
-										<ObjectIdentifier  text="{books>onUpdate}" />
-									</cells>
-									<cells>
-										<ObjectIdentifier  text="{books>onCreate}" />
-									</cells>
-								</ColumnListItem>
-							</items>
-						</Table> -->
 					</content>
 				</Page>
 			</pages>

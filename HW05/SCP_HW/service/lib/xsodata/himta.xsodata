@@ -12,9 +12,21 @@ service namespace "SAM"{
             update using "xsjs.book:odata.xsjslib::booksUpdate"
             delete forbidden;
 
+    "SAM::ExtraInfo.BooksCollection" as "BooksCollection"
+                navigates("BooksCollection_2_Author" as "toAuthor1")
+            create forbidden
+            update forbidden
+            delete forbidden;
+
     association "Authors_2_Books" principal "Authors"("authid")
             multiplicity "1" dependent "Books"("authid") multiplicity "*";
 
     association "Books_2_Author" principal "Books"("authid")
             multiplicity "1" dependent "Books"("authid") multiplicity "1";
+
+    association "Authors_2_BooksCollection" principal "Authors"("authid")
+            multiplicity "1" dependent "BooksCollection"("authid") multiplicity "*";
+
+    association "BooksCollection_2_Author" principal "BooksCollection"("authid")
+            multiplicity "1" dependent "BooksCollection"("authid") multiplicity "1";
 }

@@ -1,4 +1,4 @@
-<!-- <core:FragmentDefinition
+<core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
 	<SelectDialog
@@ -6,15 +6,12 @@
 		search="handleSearch"
 		confirm="handleClose"
 		cancel="handleClose"
-		items="{
-			path: '/BookCollection'
-		}" >
+		items="{books>/BooksCollection}"
+	>
 		<StandardListItem
-			title="{Name}"
-			description="{ProductId}"
-			icon="{ProductPicUrl}"
-			iconDensityAware="false"
-			iconInset="false"
+			press="onSelect"
+			title="{books>caption}"
+			description="{books>bid}"
 			type="Active" />
 	</SelectDialog>
-</core:FragmentDefinition>-->
+</core:FragmentDefinition>
