@@ -11,7 +11,7 @@
 		<StandardListItem
 			press="onSelect"
 			title="{books>caption}"
-			description="{books>bid}"
+			description="{books>authid}"
 			type="Active" />
 	</SelectDialog>
 </core:FragmentDefinition>

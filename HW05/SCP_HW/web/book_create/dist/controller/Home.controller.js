@@ -13,14 +13,17 @@ sap.ui.define([
 		 *  Hook for initializing the BaseController
 		 */
 		onInit : function () {	
+			/*
+			var oView = that.getView();
+			var oList = oView.byId("bookList");
+			oList.getBinding("items").refresh(true);
+			*/
 		},
 
 		onItemSelected: function(oEvent) {
-
 			var oSelectedItem = oEvent.getSource();
 			var context = encodeURIComponent(oSelectedItem.getBindingContext('books').getPath());
-			this.getRouter().navTo("details",  {bookID: context});
-            
+			this.getRouter().navTo("details",  {bookID: context});          
 		},
 
 		onSearch : function (oEvt) {
@@ -92,10 +95,31 @@ sap.ui.define([
 		},
 
 		handleClose: function(oEvent) {
-			
 			var aContexts = oEvent.getParameter("selectedContexts");
+			var obj = {};
+			aContexts.map(function(oContext) {
+				obj = oContext.getObject();
+			});
+			
+			console.log(obj);
 			if (aContexts && aContexts.length) {
-				MessageToast.show("You have chosen " + aContexts.map(function(oContext) { return oContext.getObject().caption; }).join(", "));
+			//	MessageToast.show("You have chosen " + aContexts.map(function(oContext) { return oContext.getObject().caption; }).join(", "));
+				var settings = {
+					"async": true,
+					"crossDomain": true,
+					"url": "https://p2001081257trial-trial-dev-router.cfapps.eu10.hana.ondemand.com/api/xsodata/himta.xsodata/Books",
+					"method": "POST",
+					"headers": {
+					  "Content-Type": "application/json",
+					  "cache-control": "no-cache"
+					},
+					"processData": false,
+					"data":JSON.stringify(obj)
+				  }
+				  
+				  $.ajax(settings).done(function (response) {
+					console.log(response);
+				  });
 			} else {
 				MessageToast.show("No new item was selected.");
 			}
