@@ -17,6 +17,14 @@
                     "odataVersion": "2.0"
                 }
             }
+        },
+        "editSource":{
+            "uri": "user_create/model/editMode.json",
+            "type": "JSON"
+        },
+        "displaySource":{
+            "uri": "user_create/model/displayMode.json",
+            "type": "JSON"
         }
     },
     "sap.ui": {
@@ -55,6 +63,12 @@
             },
             "books": {
                 "dataSource": "xsoDataService"
+            },
+            "editMode":{
+                "dataSource": "editSource"
+            },
+            "displayMode":{
+                "dataSource": "displaySource"
             }
         },
         "routing": {

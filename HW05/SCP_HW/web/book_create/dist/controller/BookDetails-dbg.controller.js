@@ -1,7 +1,8 @@
 sap.ui.define([
 	"book_create/controller/BaseController",
-	"sap/ui/core/routing/History"
-], function (BaseController, History) {
+	"sap/ui/core/routing/History",
+	"sap/ui/model/json/JSONModel"
+], function (BaseController, History, JSONModel) {
 	"use strict";
 	return BaseController.extend("book_create.controller.BookDetails", {
 
@@ -10,7 +11,7 @@ sap.ui.define([
 			oRouter.getRoute("details").attachPatternMatched(this._onObjectMatched, this);
 
 			this._showFormFragment('Display');
-			this.byId('edit').setEnabled(true);
+			this._toggleButtonsAndView('Display');
 		},
 
 		_formFragments: {},
@@ -31,32 +32,30 @@ sap.ui.define([
 			}
 
 			var oFormFragment = sap.ui.xmlfragment("book_create.view." + sFragmentName);
-
 			this._formFragments[sFragmentName] = oFormFragment;
+		
 			return this._formFragments[sFragmentName];
 		},
 
 		handleEditPress: function () {
 			this._showFormFragment('Change');
-			this._toggleButtonsAndView(true);
+			this._toggleButtonsAndView('Edit');
 		},
 
 		_toggleButtonsAndView: function (bEdit) {
 			
-			var oView = this.getView();
-
-			// Show the appropriate action buttons
-			oView.byId("edit").setVisible(!bEdit);
-			oView.byId("save").setVisible(bEdit);
-			oView.byId("cancel").setVisible(bEdit);
-
-			// Set the right form type
-			this._showFormFragment(bEdit ? "Change" : "Display");
-			
+			var oMdl = new JSONModel(); 
+			if(bEdit==='Edit'){
+				oMdl.loadData("./model/editMode.json")
+			}else{
+				oMdl.loadData("./model/displayMode.json")
+			}		
+	
+			this.getView().setModel(oMdl); 
 		},
 
 		handleCancelPress: function () {
-			this._toggleButtonsAndView(false);
+			this._toggleButtonsAndView('Display');
 		},
 
 		handleSavePress: function () {
@@ -78,12 +77,10 @@ sap.ui.define([
 					"data": JSON.stringify(obj)
 				};
 				$.ajax(settings).done(function (response) {
-					console.log(response);
 				});
 			}
-
-			this._toggleButtonsAndView(false);
-		//	this._refresh();
+			
+			this._toggleButtonsAndView('Display');
 		},
 
 		_onObjectMatched: function (oEvent) {
@@ -108,7 +105,6 @@ sap.ui.define([
 			        "data": JSON.stringify(obj)
 			    };
 			    $.ajax(settings).done(function (response) {
-			        console.log(response);
 				});
 				
 			this.onNavBack();
