@@ -1,28 +1,16 @@
 sap.ui.define([
 	"book_create/controller/BaseController",
-	"sap/ui/core/routing/History",
-	'jquery.sap.global'
-], function (BaseController, History, jQuery) {
+	"sap/ui/core/routing/History"
+], function (BaseController, History) {
 	"use strict";
 	return BaseController.extend("book_create.controller.BookDetails", {
+
 		onInit: function () {
 			var oRouter = this.getRouter();
 			oRouter.getRoute("details").attachPatternMatched(this._onObjectMatched, this);
 
 			this._showFormFragment('Display');
 			this.byId('edit').setEnabled(true);
-		},
-
-		_refresh: function(){
-			var oDisplayForm = oView.byId("SimpleFormDisplayColumn_oneGroup234");
-			if(oDisplayForm){
-				oDisplayForm.getBinding("items").refresh(true);
-			}		
-
-			var oChangeForm = oView.byId("SimpleFormChangeColumn_oneGroup234");
-			if(oChangeForm){
-				oChangeForm.getBinding("items").refresh(true);
-			}
 		},
 
 		_formFragments: {},
@@ -54,6 +42,7 @@ sap.ui.define([
 		},
 
 		_toggleButtonsAndView: function (bEdit) {
+			
 			var oView = this.getView();
 
 			// Show the appropriate action buttons
@@ -63,6 +52,7 @@ sap.ui.define([
 
 			// Set the right form type
 			this._showFormFragment(bEdit ? "Change" : "Display");
+			
 		},
 
 		handleCancelPress: function () {
@@ -73,7 +63,7 @@ sap.ui.define([
 			var obj = {};
 			obj.caption = sap.ui.getCore().byId("caption").getValue();
 			obj.authid = sap.ui.getCore().byId("authid").getValue();
-			obj.bid = sap.ui.getCore().byId("ID").getText();
+			obj.bid = sap.ui.getCore().byId("cID").getText();
 			obj.onUpdate = "/Date(1072918861000)/";
 			obj.onCreate = "/Date(1072918861000)/";
 			if (obj.caption) {
@@ -93,7 +83,7 @@ sap.ui.define([
 			}
 
 			this._toggleButtonsAndView(false);
-			this._refresh();
+		//	this._refresh();
 		},
 
 		_onObjectMatched: function (oEvent) {
@@ -121,7 +111,7 @@ sap.ui.define([
 			        console.log(response);
 				});
 				
-				this._refresh();
+			this.onNavBack();
 		},
 
 

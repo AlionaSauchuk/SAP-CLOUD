@@ -20,6 +20,7 @@ const bookLib = new Booklib($.hdb.getConnection({
                     break;
                 }
                 case $.net.http.DEL : {
+                    console.log($.request);
                     bookLib.doDelete(JSON.parse($.request.body.asString()));
                     break;
                 }
