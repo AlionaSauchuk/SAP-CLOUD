@@ -103,7 +103,7 @@ public class BookDao implements IBookDao {
 						"UPDATE \"javaSAM::Book\" SET \"caption\" = ?, \"description\" = ?, \"pages\" = ? WHERE \"id\" = ?")) {
 			stmnt.setString(1, entity.getCaption());
 			stmnt.setString(2, entity.getDescription());
-			stmnt.setInt(3, entity.getpages());
+			stmnt.setInt(3, entity.getPages());
 			stmnt.setLong(4, entity.getId());
 			stmnt.executeUpdate();
 		} catch (SQLException e) {
