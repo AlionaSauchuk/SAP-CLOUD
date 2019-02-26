@@ -31,15 +31,15 @@ public class BookDao implements IBookDao {
 		Optional<Book> entity = null;
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"SELECT TOP 1 \"id\", \"caption\", \"description\", \"pages\" FROM \"javaSAM::Book\" WHERE \"id\" = ?")) {
+						"SELECT TOP 1 \"bid\", \"authid\", \"caption\" FROM \"javaSAM::Book\" WHERE \"bid\" = ?")) {
 			stmnt.setLong(1, id);
 			ResultSet result = stmnt.executeQuery();
 			if (result.next()) {
 				Book book = new Book();
 				book.setId(id);
+				book.setAuthid(result.getInt("authid"));
 				book.setCaption(result.getString("caption"));
-				book.setDescription(result.getString("description"));
-				book.setPages(result.getInt("pages"));
+				
 				entity = Optional.of(book);
 			} else {
 				entity = Optional.empty();
@@ -55,14 +55,13 @@ public class BookDao implements IBookDao {
 		List<Book> bookList = new ArrayList<Book>();
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn
-						.prepareStatement("SELECT \"id\", \"caption\", \"description\", \"pages\" FROM \"javaSAM::Book\"")) {
+						.prepareStatement("SELECT \"bid\", \"authid\", \"caption\" FROM \"javaSAM::Book\"")) {
 			ResultSet result = stmnt.executeQuery();
 			while (result.next()) {
 				Book book = new Book();
-				book.setId(result.getLong("ID"));
-				book.setCaption(result.getString("CAPTION"));
-				book.setDescription(result.getString("DESCRIPTION"));
-				book.setPages(result.getInt("PAGES"));
+				book.setId(result.getLong("bid"));
+				book.setAuthid(result.getInt("authid"));
+				book.setCaption(result.getString("caption"));
 				bookList.add(book);
 			}
 		} catch (SQLException e) {
@@ -75,10 +74,9 @@ public class BookDao implements IBookDao {
 	public void save(Book entity) {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"INSERT INTO \"javaSAM::Book\"(\"caption\", \"description\", \"pages\") VALUES (?, ?, ?)")) {
-			stmnt.setString(1, entity.getCaption());
-			stmnt.setString(2, entity.getDescription());
-			stmnt.setInt(3, entity.getPages());
+						"INSERT INTO \"javaSAM::Book\"(\"authid\", \"caption\") VALUES (?, ?)")) {
+			stmnt.setInt(1, entity.getAuthid());
+			stmnt.setString(2, entity.getCaption());
 			stmnt.execute();
 		} catch (SQLException e) {
 			logger.error("Error while trying to add entity: " + e.getMessage());
@@ -88,7 +86,7 @@ public class BookDao implements IBookDao {
 	@Override
 	public void delete(Long id) {
 		try (Connection conn = dataSource.getConnection();
-				PreparedStatement stmnt = conn.prepareStatement("DELETE FROM \"javaSAM::Book\" WHERE \"id\" = ?")) {
+				PreparedStatement stmnt = conn.prepareStatement("DELETE FROM \"javaSAM::Book\" WHERE \"bid\" = ?")) {
 			stmnt.setLong(1, id);
 			stmnt.execute();
 		} catch (SQLException e) {
@@ -100,11 +98,10 @@ public class BookDao implements IBookDao {
 	public void update(Book entity) {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"UPDATE \"javaSAM::Book\" SET \"caption\" = ?, \"description\" = ?, \"pages\" = ? WHERE \"id\" = ?")) {
-			stmnt.setString(1, entity.getCaption());
-			stmnt.setString(2, entity.getDescription());
-			stmnt.setInt(3, entity.getPages());
-			stmnt.setLong(4, entity.getId());
+						"UPDATE \"javaSAM::Book\" SET \"authid\" = ?, \"caption\" = ? WHERE \"bid\" = ?")) {
+			stmnt.setInt(1, entity.getAuthid());
+			stmnt.setString(2, entity.getCaption());
+			stmnt.setLong(3, entity.getId());
 			stmnt.executeUpdate();
 		} catch (SQLException e) {
 			logger.error("Error while trying to update entity: " + e.getMessage());

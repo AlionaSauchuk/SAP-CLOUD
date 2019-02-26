@@ -2,22 +2,26 @@ package com.leverx.leverxspringdemo.domain;
 
 public class Book {
 	
-	private long id;
-	
+	private long bid;
+	private int authid;	
 	private String caption;
 	
-	private String description;
-	
-	private int pages;
-	
 	public long getId() {
-		return id;
+		return bid;
 	}
 
 	public void setId(long id) {
-		this.id = id;
+		this.bid = id;
 	}
 
+	public int getAuthid() {
+		return authid;
+	}
+
+	public void setAuthid(int id) {
+		this.authid = id;
+	}
+	
 	public String getCaption() {
 		return caption;
 	}
@@ -26,20 +30,6 @@ public class Book {
 		this.caption = caption;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getPages() {
-		return pages;
-	}
-
-	public void setPages(int pages) {
-		this.pages = pages;
-	}
+	
 	
 }
