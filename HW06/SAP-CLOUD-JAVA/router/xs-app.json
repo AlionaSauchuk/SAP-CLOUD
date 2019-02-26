@@ -5,8 +5,7 @@
     {
       "source": "/api/(.*)",
       "target": "$1",
-      "destination": "javarest",
-      "authenticationType": "xsuaa"
+      "destination": "javarest"
     },
     {
 	  "source": "/s4c/(.*)",

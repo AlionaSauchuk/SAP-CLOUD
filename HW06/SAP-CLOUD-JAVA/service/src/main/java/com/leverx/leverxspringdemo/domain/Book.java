@@ -26,7 +26,7 @@ public class Book {
 		return caption;
 	}
 
-	public void setCaption(String cation) {
+	public void setCaption(String caption) {
 		this.caption = caption;
 	}
 

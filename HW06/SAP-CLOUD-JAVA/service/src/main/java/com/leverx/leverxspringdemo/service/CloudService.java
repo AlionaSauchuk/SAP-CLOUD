@@ -21,7 +21,6 @@ public class CloudService {
 	
 	@Autowired
 	private CloudPlatform platform;
-	
 
 	@Autowired
 	private ScpCfCloudPlatform space;
