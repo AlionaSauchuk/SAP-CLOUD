@@ -1,4 +1,5 @@
 {
+ "welcomeFile": "/api/",
   "authenticationMethod": "route",
   "routes": [
     {

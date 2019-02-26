@@ -19,11 +19,11 @@
             }
         },
         "editSource":{
-            "uri": "user_create/model/editMode.json",
+            "uri": "book_create/model/editMode.json",
             "type": "JSON"
         },
         "displaySource":{
-            "uri": "user_create/model/displayMode.json",
+            "uri": "book_create/model/displayMode.json",
             "type": "JSON"
         }
     },
