@@ -1,0 +1,11 @@
+namespace javaSAM;
+using javaSAM::ExtraInfo.Book;
+
+entity Author {
+    @Comment: 'Id of Author'
+    key authid : Integer64 generated always as identity ( start with 1 increment by 1 );
+    @Comment: 'Author name'
+    name : String(30);
+
+    toBook : Association[*] to Book on toBook.authid = authid;
+};

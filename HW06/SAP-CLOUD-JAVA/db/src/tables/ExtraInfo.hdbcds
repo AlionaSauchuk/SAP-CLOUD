@@ -1,0 +1,17 @@
+namespace javaSAM;
+using javaSAM::Author;
+
+context ExtraInfo{
+
+		entity Book {
+			@Comment: 'Id of Book'
+			key bid : Integer64 generated always as identity ( start with 1 increment by 1 );
+		    @Comment: 'Author of the Book'
+		    authid : String(4);
+		    @Comment: 'Caption'
+		    caption : String(50);
+
+			toAuthor : Association[1] to Author on toAuthor.authid = authid;
+		};
+
+};

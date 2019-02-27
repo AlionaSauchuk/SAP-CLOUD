@@ -31,7 +31,7 @@ public class BookDao implements IBookDao {
 		Optional<Book> entity = null;
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"SELECT TOP 1 \"bid\", \"authid\", \"caption\" FROM \"javaSAM::Book\" WHERE \"bid\" = ?")) {
+						"SELECT TOP 1 \"bid\", \"authid\", \"caption\" FROM \"javaSAM::ExtraInfo.Book\" WHERE \"bid\" = ?")) {
 			stmnt.setLong(1, id);
 			ResultSet result = stmnt.executeQuery();
 			if (result.next()) {
@@ -55,7 +55,7 @@ public class BookDao implements IBookDao {
 		List<Book> bookList = new ArrayList<Book>();
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn
-						.prepareStatement("SELECT \"bid\", \"authid\", \"caption\" FROM \"javaSAM::Book\"")) {
+						.prepareStatement("SELECT \"bid\", \"authid\", \"caption\" FROM \"javaSAM::ExtraInfo.Book\"")) {
 			ResultSet result = stmnt.executeQuery();
 			while (result.next()) {
 				Book book = new Book();
@@ -74,7 +74,7 @@ public class BookDao implements IBookDao {
 	public void save(Book entity) {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"INSERT INTO \"javaSAM::Book\"(\"authid\", \"caption\") VALUES (?, ?)")) {
+						"INSERT INTO \"javaSAM::ExtraInfo.Book\"(\"authid\", \"caption\") VALUES (?, ?)")) {
 			stmnt.setInt(1, entity.getAuthid());
 			stmnt.setString(2, entity.getCaption());
 			stmnt.execute();
@@ -86,7 +86,7 @@ public class BookDao implements IBookDao {
 	@Override
 	public void delete(Long id) {
 		try (Connection conn = dataSource.getConnection();
-				PreparedStatement stmnt = conn.prepareStatement("DELETE FROM \"javaSAM::Book\" WHERE \"bid\" = ?")) {
+				PreparedStatement stmnt = conn.prepareStatement("DELETE FROM \"javaSAM::ExtraInfo.Book\" WHERE \"bid\" = ?")) {
 			stmnt.setLong(1, id);
 			stmnt.execute();
 		} catch (SQLException e) {
@@ -98,7 +98,7 @@ public class BookDao implements IBookDao {
 	public void update(Book entity) {
 		try (Connection conn = dataSource.getConnection();
 				PreparedStatement stmnt = conn.prepareStatement(
-						"UPDATE \"javaSAM::Book\" SET \"authid\" = ?, \"caption\" = ? WHERE \"bid\" = ?")) {
+						"UPDATE \"javaSAM::ExtraInfo.Book\" SET \"authid\" = ?, \"caption\" = ? WHERE \"bid\" = ?")) {
 			stmnt.setInt(1, entity.getAuthid());
 			stmnt.setString(2, entity.getCaption());
 			stmnt.setLong(3, entity.getId());

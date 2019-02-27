@@ -3,6 +3,7 @@ package com.leverx.leverxspringdemo.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import com.google.gson.JsonArray;
 
 import com.google.gson.JsonElement;
 import com.sap.cloud.sdk.cloudplatform.ScpCfCloudPlatform;
@@ -25,6 +26,9 @@ public class CloudService {
 	@Autowired
 	private ScpCfCloudPlatform space;
 	
+	@Autowired private 
+	ScpCfCloudPlatform getSchema;
+	
 	public String getApplicationName() {
 		return platform.getApplicationName();
 	}
@@ -32,6 +36,10 @@ public class CloudService {
 	public Map<String, JsonElement> getSpaceName(){
 		space.getApplicationName();
 		return  space.getVcapApplication();
+	}
+	
+	public Map<String, JsonArray> getSchemaName() {
+		return getSchema.getVcapServices();
 	}
 	
 	public List<Destination> getDestinations() {
