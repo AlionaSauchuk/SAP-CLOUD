@@ -26,8 +26,8 @@ public class CloudService {
 	@Autowired
 	private ScpCfCloudPlatform space;
 	
-	@Autowired private 
-	ScpCfCloudPlatform getSchema;
+	@Autowired 
+	private ScpCfCloudPlatform getSchema;
 	
 	public String getApplicationName() {
 		return platform.getApplicationName();

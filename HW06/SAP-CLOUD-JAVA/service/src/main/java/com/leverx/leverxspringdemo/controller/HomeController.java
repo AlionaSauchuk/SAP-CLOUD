@@ -42,10 +42,6 @@ public class HomeController {
 	
 	@Autowired  
 	private CloudService cloudService;  
-/*	
-	@Autowired  private 
-	SecurityService securityService; 
-*/
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)  
 	public String getHome(Model model) {   
@@ -64,23 +60,5 @@ public class HomeController {
 		
 		return "index"; 
 	} 
-	/*
-	@RequestMapping(value="/jwt", method=RequestMethod.GET)  
-	public String getJWT(Model model) {   
-		Optional<AuthToken> token = cloudService.getCurrToken();
-		JsonObject jo = cloudService.getInfo(token);
-		JsonElement name = jo.get(FINAL_NAME);
-		JsonElement familyname = jo.get(FAMILY_NAME);
-		model.addAttribute("token", jo);
-		model.addAttribute("name", name);
-		model.addAttribute("familyname", familyname);
-		return "jwt"; 
-	} 
-	@RequestMapping(value="/scope", method=RequestMethod.GET)
-	public String checkScope() throws AccessDeniedException {
-		securityService.userHasAuthorization("Display");
-		return "scope";
-	}
-	*/
 
 }

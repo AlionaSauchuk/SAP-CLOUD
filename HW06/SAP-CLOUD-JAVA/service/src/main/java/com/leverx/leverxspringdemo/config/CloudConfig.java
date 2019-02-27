@@ -20,4 +20,9 @@ public class CloudConfig {
 		return  ScpCfCloudPlatform.getInstanceOrThrow();
 	}
 	
+	@Bean
+	public ScpCfCloudPlatform getSchema() {
+		return  ScpCfCloudPlatform.getInstanceOrThrow();
+	}
+	
 }
